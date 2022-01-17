@@ -2,8 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   position: fixed;
+  box-shadow: 0px 0px 10px 10px #fff;
+  background: #0d0d0d;
+  overflow: hidden;
 }
 
 .branding{
@@ -16,6 +20,7 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
+  
 }
 
 .headline h1{
