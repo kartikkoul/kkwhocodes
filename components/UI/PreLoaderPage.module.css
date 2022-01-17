@@ -1,0 +1,41 @@
+.preLoaderPage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+}
+
+.branding{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headline{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.headline h1{
+  font-family: 'Righteous', cursive;
+  font-weight: lighter;
+  color: rgb(250, 250, 250);
+}
+
+.svgArea{
+  width: 50px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* .svgArea .k{
+  height: 33px;
+}
+
+.svgArea .dot{
+  height: 8px;
+} */
