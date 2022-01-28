@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   // }, [showLoader])
   return (
     <React.Fragment>
-      {showLoader && <PreLoaderPage/>}
+      {/* {showLoader && <PreLoaderPage/>} */}
       <Component {...pageProps} />
     </React.Fragment>
   )
