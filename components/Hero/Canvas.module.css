@@ -1,0 +1,9 @@
+.canvasArea{
+    color: #fff;
+    flex: 4;
+}
+
+.canvasArea h1{
+    font-size: 2rem;
+    text-align: center;
+}

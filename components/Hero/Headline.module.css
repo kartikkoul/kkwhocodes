@@ -1,0 +1,17 @@
+.headline{
+    font-family: 'Poppins', cursive;
+    flex: 4;
+}
+
+.headline .content h1{
+    color: #fff;
+}
+
+.headline .content ul{
+    color: #59BEB8;
+    padding: 0;
+}
+
+.headline .content li{
+    list-style: none;
+}
