@@ -1,7 +1,5 @@
 .hero{
     display: flex;
-    flex-direction: row;
-    height: 100vh;
-    flex: 100%;
-    justify-content: center;
+    height: 85vh;
+    position: relative;
 }
