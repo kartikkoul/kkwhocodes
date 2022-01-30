@@ -1,0 +1,34 @@
+@import "../sass/variables";
+
+.headline{
+    font-family: 'Poppins', cursive;
+    width: 50%;
+    margin: auto;
+
+    .content{
+        position: absolute;
+        transform: rotate(-90deg) translate(2rem);
+
+        h1{
+            color: #fff;
+            font-size: 4rem;
+            letter-spacing: 0.2rem;
+        }
+
+        span{
+            position: absolute;
+            color: #59BEB8;
+            padding: 0;
+            transform: rotate(90deg) translate(-3rem, 0.5rem);
+            margin: 0;
+            padding: 0;
+        }
+
+        p{
+            list-style: none;
+            font-size: 2.3rem;
+            margin: 0;
+            font-weight:600;
+        }
+    }
+}

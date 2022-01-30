@@ -1,10 +1,11 @@
 import React from 'react';
 import classes from './Canvas.module.css';
 
-
 const Canvas = () => {
   return <div className={classes.canvasArea}>
-      <h1>Canvas</h1>
+    <canvas id="hero-canvas" className={classes.heroCanvas}>
+
+    </canvas>
   </div>;
 };
 
