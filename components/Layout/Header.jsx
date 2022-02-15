@@ -7,11 +7,11 @@ const Header = () => {
   return <header className={classes.header}>
       <nav>
           <ul>
-              <li><Link href={`/`}>Projects</Link></li>
-              <li><Link href={`/`}>Skills</Link></li>
-              <li><Link href={`/`}>Blogs</Link></li>
-              <li><Link href={`/`}>About</Link></li>
-              <li><Link href={`/`}>Contact</Link></li>
+              <li><Link href={`/`}>projects()</Link></li>
+              <li><Link href={`/`}>skills()</Link></li>
+              <li><Link href={`/`}>blogs()</Link></li>
+              <li><Link href={`/`}>about()</Link></li>
+              <li><Link href={`/`}>contact()</Link></li>
           </ul>
       </nav>
       <div className={classes.brand}>k.</div>

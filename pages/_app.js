@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import PreLoaderPage from '../components/UI/PreLoaderPage';
+import Layout from '../components/Layout/Layout'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -15,7 +16,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       {/* {showLoader && <PreLoaderPage/>} */}
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </React.Fragment>
   )
 }

@@ -2,10 +2,12 @@
   font-family: "Poppins", cursive;
   width: 50%;
   margin: auto;
+  position: relative;
 }
 .headline .content {
   position: absolute;
   transform: rotate(-90deg) translate(2rem);
+  top: -4rem;
 }
 .headline .content h1 {
   color: #fff;

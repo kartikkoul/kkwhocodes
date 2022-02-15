@@ -1,0 +1,19 @@
+.about {
+  min-height: 100vh;
+  font-family: "Poppins", cursive;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+}
+.about p {
+  color: white;
+  margin: 0;
+  position: absolute;
+  top: 2rem;
+  left: 4rem;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+/*# sourceMappingURL=About.module.css.map */

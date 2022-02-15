@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
+import About from '../components/About/About'
 import Hero from '../components/Hero/Hero'
 import Layout from '../components/Layout/Layout'
 import styles from '../styles/Home.module.css'
@@ -15,9 +16,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Layout>
           <Hero/>
-        </Layout>
+          <About/>
       </main>
     </div>
   )
