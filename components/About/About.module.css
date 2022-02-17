@@ -3,10 +3,10 @@
   font-family: "Poppins", cursive;
   position: relative;
   display: flex;
-  align-items: center;
   padding: 4rem;
+  min-width: 100vh;
 }
-.about p {
+.about > p {
   color: white;
   margin: 0;
   position: absolute;
