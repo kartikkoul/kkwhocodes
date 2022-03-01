@@ -1,0 +1,53 @@
+.headline {
+  font-family: "Poppins", cursive;
+  width: 50%;
+  margin: auto;
+}
+.headline .content {
+  position: absolute;
+  transform: rotate(-90deg) translate(6rem);
+}
+.headline .content h1 {
+  color: #fff;
+  font-size: 4rem;
+  letter-spacing: 0.2rem;
+}
+.headline .content span {
+  position: absolute;
+  color: #59BEB8;
+  padding: 0;
+  transform: rotate(90deg) translate(-3rem, 0.5rem);
+  margin: 0;
+  padding: 0;
+}
+.headline .content p {
+  list-style: none;
+  font-size: 2.3rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 500px) {
+  .headline {
+    width: 100%;
+  }
+  .headline .content {
+    transform: rotate(0);
+    top: 0;
+    right: 1rem;
+  }
+  .headline .content h1 {
+    font-size: 2.6rem;
+  }
+  .headline .content span {
+    text-align: right;
+    top: 5.5rem;
+    right: 0rem;
+    transform: rotate(0);
+  }
+  .headline .content p {
+    font-size: 1.2rem;
+  }
+}
+
+/*# sourceMappingURL=Headline.module.css.map */

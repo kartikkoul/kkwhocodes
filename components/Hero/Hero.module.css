@@ -1,0 +1,12 @@
+.hero{
+    display: flex;
+    height: 90vh;
+    position: relative;
+    background: linear-gradient(#000, #31225A, #000);
+}
+
+@media screen and (max-width: 500px){
+    .hero{
+        height: 60vh;
+    }
+}

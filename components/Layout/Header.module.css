@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  color: #fff;
+  font-family: "Righteous", sans-serif;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  align-items: flex-end;
+  margin-top: 0.5rem;
+}
+.header nav ul {
+  padding: 0;
+  display: flex;
+  width: 24rem;
+  justify-content: space-between;
+}
+.header nav ul li {
+  list-style: none;
+  font-size: 0.9rem;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+.brand {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .header nav ul {
+    width: 20rem;
+  }
+  .header nav ul li {
+    font-size: 0.8rem;
+    font-weight: 200;
+    cursor: pointer;
+  }
+}
+
+/*# sourceMappingURL=Header.module.css.map */

@@ -1,0 +1,60 @@
+@import "../sass/variables";
+
+.headline{
+    font-family: 'Poppins', cursive;
+    width: 50%;
+    margin: auto;
+
+    .content{
+        position: absolute;
+        transform: rotate(-90deg) translate(6rem);
+
+        h1{
+            color: #fff;
+            font-size: 4rem;
+            letter-spacing: 0.2rem;
+        }
+
+        span{
+            position: absolute;
+            color: #59BEB8;
+            padding: 0;
+            transform: rotate(90deg) translate(-3rem, 0.5rem);
+            margin: 0;
+            padding: 0;
+        }
+
+        p{
+            list-style: none;
+            font-size: 2.3rem;
+            margin: 0;
+            font-weight:600;
+        }
+    }
+}
+
+@media screen and (max-width:500px) {
+    .headline{
+        width: 100%;
+        .content{
+            transform: rotate(0);
+            top: 0;
+            right: 1rem;
+    
+            h1{
+                font-size: 2.6rem;
+            }
+    
+            span{
+                text-align: right;
+                top: 5.5rem;
+                right: 0rem;
+                transform: rotate(0);
+            }
+    
+            p{
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
