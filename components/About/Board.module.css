@@ -34,7 +34,10 @@
   width: 200%;
   bottom: -12rem;
   left: -7rem;
+<<<<<<< HEAD
   pointer-events: none;
+=======
+>>>>>>> d64dc8ac7daa9b87e51319431b712d7694f00543
 }
 .aboutBoard .action {
   margin-top: 2rem;
