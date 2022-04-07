@@ -1,0 +1,24 @@
+.displayFrame{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    right: 30rem;
+    top: 15rem;
+}
+
+.outerFrame{
+    right: 8rem;
+    position: absolute;
+    width: 26rem;
+    height: 26rem;
+    z-index: 1;
+}
+
+.innerFrame{
+    right: 9rem;
+    position: absolute;
+    width: 24rem;
+    height: 24rem;
+    z-index: 2;
+}

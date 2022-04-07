@@ -1,0 +1,39 @@
+.expList{
+    padding: 0;
+    position: absolute;
+    max-height: 25rem;
+    width: 19rem;
+    bottom: 5rem;
+    right: 2rem;
+}
+
+.expList li{
+    list-style: none;
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+    background: #4d25b9;
+    box-shadow: 0 0 4px 1px #ffffff1c;
+    margin-top: 1rem;
+}
+
+.expList li h3{
+    color: #c7c3d1;
+}
+
+
+.expList li p{
+    color: #bcaae7;
+}
+
+.expList li div:nth-of-type(2){
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-left: 1rem;
+    border: 2px solid #817997;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

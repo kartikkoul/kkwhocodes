@@ -17,4 +17,20 @@
   font-size: 2rem;
 }
 
+svg.blueLight{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 22rem;
+  width: 22rem;
+  z-index: 3;
+}
+
+svg.cyanLight{
+  position: absolute;
+  bottom: 0;
+  right: 24rem;
+  height: 18rem;
+  width: 18rem;
+}
 /*# sourceMappingURL=About.module.css.map */
