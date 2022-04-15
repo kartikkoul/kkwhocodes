@@ -5,6 +5,7 @@ import { useRef, useState } from 'react/cjs/react.development'
 import Arrow from '../SVGs/About/arrow.svg'
 import ExpItem from './ExpItem'
 import ExpList from './ExpList'
+import reducePeriodInMonths from '../Utils/date'
 
 const Board = () => {
   const colors = {
@@ -30,6 +31,13 @@ const Board = () => {
       period: period(new Date(2021, 7, 1)),
       imageUrl:'/assets/images/stay-at-home.png'
     },
+    {
+      id:3,
+      title:"SDE-1",
+      company:"AVRL",
+      period: period(new Date(2022, 3, 11)),
+      imageUrl:'/assets/images/avrl.jpg'
+    },
   ]
 
   function period(date1, date2){
@@ -39,16 +47,7 @@ const Board = () => {
     let rightBound;
     let leftBound = date1.toDateString().split(" ");
     leftBound = [leftBound[1], leftBound[3]].join(" ");
-
-    //Function
-    const reducePeriodInMonths = (months)=>{
-      if(months>12){
-        months -= 12;
-        periodInYears++;
-        return reducePeriodInMonths(months);
-      }
-      return months
-    }
+    
 
 
     if(date2 && typeof date2 === "object"){

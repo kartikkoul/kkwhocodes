@@ -4,6 +4,7 @@ import Script from 'next/script'
 import About from '../components/About/About'
 import Hero from '../components/Hero/Hero'
 import Layout from '../components/Layout/Layout'
+import Skills from '../components/Skills/Skills'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <main className={styles.main}>
           <Hero/>
           <About/>
+          <Skills/>
       </main>
     </div>
   )
