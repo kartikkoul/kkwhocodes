@@ -5,7 +5,7 @@
   display: flex;
   padding: 4rem;
   width: 100%;
-  overflow: hidden;
+  overflow:hidden;
 }
 .skills > p {
   color: white;
@@ -15,4 +15,14 @@
   left: 4rem;
   font-weight: 600;
   font-size: 2rem;
+  z-index: 1;
+}
+
+.skills svg.linearBg{
+  opacity: 0.15;
+  width: 200rem;
+  height: 200rem;
+  position: absolute;
+  top:-7rem;
+  left: -20rem;
 }

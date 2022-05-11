@@ -1,0 +1,17 @@
+.skillsHeadline{
+    width: 100%;
+}
+.skillsHeadline>h1{
+    color: white;
+    font-weight: 400;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 5rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.skillsHeadline>h1>span{
+    font-size: 3rem;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+}
