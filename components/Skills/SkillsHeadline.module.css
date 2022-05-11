@@ -3,7 +3,7 @@
 }
 .skillsHeadline>h1{
     color: white;
-    font-weight: 400;
+    font-weight: 100;
     font-size: 2rem;
     text-align: center;
     margin-top: 5rem;
@@ -11,7 +11,10 @@
 }
 
 .skillsHeadline>h1>span{
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 600;
     font-family: "Poppins", sans-serif;
+    background: -webkit-linear-gradient(left, #4734C1, #C53683, #2DABB4);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
