@@ -68,7 +68,7 @@ export default function CustomScrollbar() {
 
   return (
     <div
-      className="pointer-events-none fixed right-0 top-0 z-[90] hidden h-[100dvh] w-5 sm:block"
+      className="pointer-events-none fixed right-0 top-0 z-[10] hidden h-[100dvh] w-5 sm:block"
       aria-hidden
     >
       {/* Track — faint nebula line */}

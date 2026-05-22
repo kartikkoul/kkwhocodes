@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import CustomCursor from "../Cursor/CustomCursor";
 import CustomScrollbar from "../UI/CustomScrollbar";
+import PreLoaderGate from "../UI/PreLoaderGate";
 import Header from "./Header";
 
 interface LayoutProps {
@@ -9,12 +10,14 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="m-0 min-h-screen p-0">
-      <CustomCursor />
-      <CustomScrollbar />
-      <Header />
-      {children}
-    </div>
+    <PreLoaderGate>
+      <div className="m-0 min-h-screen p-0">
+        <CustomCursor />
+        <CustomScrollbar />
+        <Header />
+        {children}
+      </div>
+    </PreLoaderGate>
   );
 };
 

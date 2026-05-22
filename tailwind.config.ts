@@ -31,7 +31,6 @@ const config: Config = {
       },
       backgroundImage: {
         "hero-gradient": "linear-gradient(#000, #31225A, #000)",
-        "preloader-gradient": "linear-gradient(#0d0d0d 99%, #fff)",
         "skills-headline":
           "linear-gradient(to right, #4734C1, #C53683, #2DABB4)",
       },
