@@ -194,13 +194,18 @@ function Scene() {
   );
 }
 
-export default function HeroScene() {
+interface HeroSceneProps {
+  active?: boolean;
+}
+
+export default function HeroScene({ active = true }: HeroSceneProps) {
   return (
     <Canvas
       camera={{ position: [0, 0, 5.5], fov: 55 }}
       className="h-full w-full"
       gl={{ antialias: true, alpha: true }}
-      dpr={[1, 2]}
+      dpr={active ? [1, 1.5] : 1}
+      frameloop={active ? "always" : "never"}
       style={{ background: "transparent" }}
     >
       <Scene />

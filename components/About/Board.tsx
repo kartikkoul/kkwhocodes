@@ -7,14 +7,17 @@ import Arrow from "../SVGs/About/arrow.svg";
 import ExpItem, { ExpItemProps } from "./ExpItem";
 import ExpList from "./ExpList";
 import reducePeriodInMonths from "../Utils/date";
+import { useReducedMotion } from "../Utils/useReducedMotion";
 
 const colors = {
   cyan: "#00B2FF",
-  green: "#21d83e",
+  green: "#21d83c",
   purp: "#8f8dfe",
   saffron: "#f7a501",
   yellow: "#fff500",
 } as const;
+
+const stack = ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "Figma"];
 
 const formatPeriod = (date1: Date, date2?: Date): string => {
   const leftParts = date1.toDateString().split(" ");
@@ -52,6 +55,7 @@ const formatPeriod = (date1: Date, date2?: Date): string => {
 
 const Board = () => {
   const [isActive, setIsActive] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   const exp: ExpItemProps[] = [
     {
@@ -65,7 +69,7 @@ const Board = () => {
       id: 2,
       title: "Freelancer",
       company: "Self-Employed",
-      period: formatPeriod(new Date(2021, 7, 1)),
+      period: formatPeriod(new Date(2021, 7, 1), new Date(2022, 3, 11)),
       imageUrl: "/assets/images/stay-at-home.png",
     },
     {
@@ -78,25 +82,28 @@ const Board = () => {
   ];
 
   return (
-    <motion.div
-      className="relative mt-16 flex max-h-[36rem] min-h-[30rem] w-[36rem] shrink-0 flex-col border border-[#32b4f511] bg-[#32b4f513] p-8 font-poppins text-white shadow-board"
-      initial={{ opacity: 0, x: -30 }}
+    <motion.article
+      className="relative mt-14 flex w-full max-w-xl shrink-0 flex-col border border-[#32b4f511] bg-[#32b4f513] p-6 text-white shadow-board  md:min-h-[30rem] md:p-8"
+      initial={reducedMotion ? false : { opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 80, damping: 16 }}
-      whileHover={{
-        boxShadow: "0px 0px 2rem 12px #32b4f550",
-        borderColor: "#32b4f533",
-      }}
+      whileHover={
+        reducedMotion
+          ? undefined
+          : {
+              boxShadow: "0px 0px 2rem 12px #32b4f550",
+              borderColor: "#32b4f533",
+            }
+      }
     >
       <div className="m-0 h-full text-[1.1rem] [&_span]:text-[1.2rem] [&_span]:font-semibold">
         Based out of <span style={{ color: colors.saffron }}>India</span>, I&apos;m
-        a developer with a passion for all things tech. I enjoy continually
+        an engineer with a passion for all things tech. I enjoy continually
         learning new concepts and staying up-to-date with the latest tech in
         this fast-paced environment. Apart from coding, I love to watch{" "}
-        <b>Documentaries</b>, <b>Thrillers</b> and <b>Biopics</b> &amp; play
-        video games. My favourite video game series are <b>Assassin Creed</b>,{" "}
-        <b>Resident Evil</b>, <b>FarCry</b> and <b>Watch Dogs</b>.
+        <b>Documentaries</b>, <b>War epics</b>, <b>Thrillers</b> and <b>Biopics</b> &amp; read/listen about&nbsp;
+        <b>Philosophy</b> or <b>Pyschology</b>.
         <br />
         <br />
         My <span style={{ color: colors.purp }}>goal</span> is to always
@@ -106,26 +113,41 @@ const Board = () => {
         <br />
         <br />
         On the frontend side, I mostly use{" "}
-        <span style={{ color: colors.cyan }}>React</span>, Designing is mostly
-        done in <b>Figma</b>. Backend wise, I tend to use{" "}
-        <span style={{ color: colors.green }}>Node.js</span> with{" "}
-        <b>MongoDB</b>.
+        <span style={{ color: colors.cyan }}>React</span> & <span style={{ color: colors.cyan }}>NextJS</span>, while in Backend, I tend to use{" "}
+        <span style={{ color: colors.green }}>Node.js</span>.
+        <br/>
+        <br/>
+        I also create <span style={{ color: colors.purp }}>AI</span> powered systems including{" "}
+        <span style={{ color: colors.purp }}>RAG</span> & <span style={{ color: colors.purp }}>Agentic AI</span>.
       </div>
-      <div className="mt-8 flex h-16 w-full items-center justify-between">
+
+      <div className="mt-8 flex min-h-16 w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
           <Link
             href="https://drive.google.com/file/d/1Y8xAGKCEfj8cNyaOChNbTiIsmxpljbLq/view?usp=sharing"
             target="_blank"
-            className="m-0 block h-[3.2rem] rounded border-2 border-accent-violet bg-accent-violet p-[0.6rem] text-[1.18rem] font-medium shadow-resume transition-[box-shadow] duration-300 hover:shadow-resumeHover"
+            rel="noopener noreferrer"
+            className="m-0 inline-flex h-[3.2rem] items-center rounded border-2 border-accent-violet bg-accent-violet px-4 text-[1rem] font-medium shadow-resume transition-[box-shadow] duration-300 hover:shadow-resumeHover md:text-[1.1rem]"
           >
             My Resume 📄
           </Link>
         </motion.div>
+
         <motion.div
           onClick={() => setIsActive((prev) => !prev)}
-          className="flex h-[3.3rem] w-3/5 cursor-pointer items-center justify-between rounded border border-accent-violet bg-[#150a339a] p-[0.8rem]"
+          className="relative flex h-[3.3rem] w-full cursor-pointer items-center justify-between rounded border border-accent-violet bg-[#150a339a] p-[0.8rem] sm:w-3/5"
           whileHover={{ borderColor: "#9655fe" }}
           whileTap={{ scale: 0.98 }}
+          role="button"
+          tabIndex={0}
+          aria-expanded={isActive}
+          aria-label="Toggle work experience list"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setIsActive((prev) => !prev);
+            }
+          }}
         >
           <ExpItem {...exp[exp.length - 1]} />
           <motion.div
@@ -135,58 +157,17 @@ const Board = () => {
             <Arrow className="ml-1 h-6 text-[#662eff]" />
           </motion.div>
         </motion.div>
+
         <AnimatePresence>{isActive && <ExpList exp={exp} />}</AnimatePresence>
       </div>
-      <motion.div
-        className="pointer-events-none absolute -bottom-48 -left-28 h-[200%] w-[200%]"
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.36, 0.5, 0.36],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 1313 1117"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g filter="url(#filter0_f_529_566)">
-            <circle
-              cx="656.5"
-              cy="619.5"
-              r="189.5"
-              fill="#9555FE"
-              fillOpacity="0.36"
-            />
-          </g>
-          <defs>
-            <filter
-              id="filter0_f_529_566"
-              x="0"
-              y="-37"
-              width="1313"
-              height="1313"
-              filterUnits="userSpaceOnUse"
-              colorInterpolationFilters="sRGB"
-            >
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="BackgroundImageFix"
-                result="shape"
-              />
-              <feGaussianBlur
-                stdDeviation="233.5"
-                result="effect1_foregroundBlur_529_566"
-              />
-            </filter>
-          </defs>
-        </svg>
-      </motion.div>
-    </motion.div>
+
+      <div
+        className={`pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-[#9555FE]/35 blur-[90px] ${
+          reducedMotion ? "" : "about-glow-pulse"
+        }`}
+        aria-hidden
+      />
+    </motion.article>
   );
 };
 

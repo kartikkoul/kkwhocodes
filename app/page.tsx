@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      {/* <About />
-      <Skills /> */}
+      <About />
+      {/* <Skills /> */}
     </main>
   );
 }

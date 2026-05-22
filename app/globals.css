@@ -77,4 +77,87 @@ html::-webkit-scrollbar {
     animation: none;
     opacity: 0.75;
   }
+
+  .about-glow-pulse,
+  .about-light-pulse,
+  .about-light-float,
+  .about-frame-spin,
+  .about-frame-float {
+    animation: none;
+  }
+}
+
+/* About section — GPU-friendly CSS loops (no Framer JS per frame) */
+@keyframes about-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.06);
+  }
+}
+
+.about-glow-pulse {
+  animation: about-glow-pulse 6s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes about-light-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+.about-light-pulse {
+  animation: about-light-pulse 3s ease-in-out infinite;
+}
+
+@keyframes about-light-float {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-12px);
+  }
+}
+
+.about-light-float {
+  animation: about-light-float 4s ease-in-out infinite;
+}
+
+@keyframes about-frame-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.about-frame-spin {
+  animation: about-frame-spin 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes about-frame-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.about-frame-float {
+  animation: about-frame-float 5s ease-in-out infinite;
 }

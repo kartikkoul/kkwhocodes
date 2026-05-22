@@ -3,32 +3,44 @@
 import { motion } from "framer-motion";
 import Outer from "../SVGs/About/DisplayFrame/Outer.svg";
 import Inner from "../SVGs/About/DisplayFrame/Inner.svg";
+import { useReducedMotion } from "../Utils/useReducedMotion";
+import Image from "next/image"
+
+const highlights = [
+  { label: "Focus", value: "Full-stack(Backend focused) & AI engineering" },
+  { label: "Based in", value: "India" },
+  { label: "Open to", value: "Remote roles" },
+];
 
 const DisplayFrame = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      className="relative mt-16 flex w-1/2 items-center justify-center"
-      initial={{ opacity: 0, x: 30 }}
+      className="relative flex w-full max-w-md items-center justify-center py-8 md:max-w-lg md:py-0 xl:max-w-none"
+      initial={reducedMotion ? false : { opacity: 0, x: 30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 80, damping: 16 }}
     >
-      <motion.div
-        className="absolute right-32 z-10"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      <div
+        className={`absolute right-8 z-10 md:right-16 lg:right-24 xl:right-32 ${
+          reducedMotion ? "" : "about-frame-spin"
+        }`}
       >
-        <Outer className="h-[26rem] w-[26rem]" />
-      </motion.div>
+        <Outer className="h-56 w-56 md:h-[22rem] md:w-[22rem] lg:h-[30rem] lg:w-[30rem]" />
+      </div>
 
-      <motion.div
-        className="absolute right-36 z-20"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        whileHover={{ scale: 1.05 }}
+      <div
+        className={`absolute right-10 z-20 md:right-20 lg:right-28 xl:right-36 ${
+          reducedMotion ? "" : "about-frame-float"
+        }`}
       >
-        <Inner className="h-96 w-96" />
-      </motion.div>
+        <Inner className="h-48 w-48 md:h-80 md:w-80 lg:h-[28rem] lg:w-[28rem]" />
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1 text-center">
+          <Image src={""} alt="Your photo here" />
+        </div>
+      </div>
     </motion.div>
   );
 };
