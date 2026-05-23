@@ -4,11 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { href: "/", label: "projects()" },
-  { href: "/", label: "skills()" },
+  { href: "/#projects", label: "projects()" },
+  { href: "/#skills", label: "skills()" },
   { href: "/", label: "blogs()" },
   { href: "/#about", label: "about()" },
-  { href: "/", label: "contact()" },
+  { href: "/#contact", label: "contact()" },
 ];
 
 const navVariants = {

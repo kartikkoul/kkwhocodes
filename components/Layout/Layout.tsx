@@ -3,6 +3,7 @@ import CustomCursor from "../Cursor/CustomCursor";
 import CustomScrollbar from "../UI/CustomScrollbar";
 import PreLoaderGate from "../UI/PreLoaderGate";
 import SmoothScroll from "../UI/SmoothScroll";
+import Footer from "./Footer";
 import Header from "./Header";
 
 interface LayoutProps {
@@ -18,6 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
         <CustomScrollbar />
         <Header />
         {children}
+        <Footer />
       </div>
     </PreLoaderGate>
   );
