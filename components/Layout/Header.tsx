@@ -30,7 +30,7 @@ const itemVariants = {
 
 const Header = () => {
   return (
-    <header className="mx-auto mt-2 flex w-[90%] items-end justify-between font-righteous text-white max-[500px]:flex-col-reverse max-[500px]:items-center max-[500px]:justify-center">
+    <header className="mx-auto mt-2 flex w-[90%] bg-transparent items-end justify-between font-righteous text-white max-[500px]:flex-col-reverse max-[500px]:items-center max-[500px]:justify-center">
       <nav>
         <motion.ul
           className="flex w-96 justify-between p-0 max-[500px]:w-80"

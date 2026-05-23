@@ -18,7 +18,6 @@ interface PreLoaderLogoProps {
   kVariant: Variants;
   dotVariant: Variants;
   enterKVariant: Variants;
-  dotAnimation: string;
 }
 
 function KLetter({ maskId, className }: { maskId: string; className?: string }) {

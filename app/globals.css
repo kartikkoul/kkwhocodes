@@ -5,6 +5,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   padding: 0;
@@ -73,6 +77,10 @@ html::-webkit-scrollbar {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .scrollbar-aurora {
     animation: none;
     opacity: 0.75;

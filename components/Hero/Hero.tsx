@@ -19,7 +19,7 @@ const Hero = () => {
       className="relative flex h-[90vh] items-center justify-center overflow-hidden bg-hero-gradient max-[500px]:h-[60vh]"
     >
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-0 top-0"
         aria-hidden
       >
         <HeroScene active={sceneActive} />

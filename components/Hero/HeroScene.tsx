@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Stars, MeshDistortMaterial, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
-const PARTICLE_COUNT = 2500;
+const PARTICLE_COUNT = 10000;
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
@@ -58,7 +58,7 @@ function ParticleField() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.035}
+        size={0.01}
         vertexColors
         transparent
         opacity={0.85}

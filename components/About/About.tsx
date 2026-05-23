@@ -10,7 +10,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative mt-2 flex min-h-screen max-h-screen w-full overflow-hidden p-16 font-poppins"
+      className="relative mt-2 flex min-h-screen w-full overflow-hidden p-16 font-poppins"
     >
       <motion.p
         className="absolute left-16 top-8 m-0 text-[2rem] font-semibold text-white"

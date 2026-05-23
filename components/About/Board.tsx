@@ -30,7 +30,7 @@ const formatPeriod = (date1: Date, date2?: Date): string => {
     const rightParts = date2.toDateString().split(" ");
     rightBound = `${rightParts[1]} ${rightParts[3]}`;
     period = Math.floor(
-      Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24) / 30
+      Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24) / 30,
     );
   } else {
     const presentDate = new Date();
@@ -38,7 +38,7 @@ const formatPeriod = (date1: Date, date2?: Date): string => {
     period = Math.floor(
       Math.abs(presentDate.getTime() - date1.getTime()) /
         (1000 * 60 * 60 * 24) /
-        30
+        30,
     );
   }
 
@@ -64,7 +64,7 @@ const Board = () => {
       company: "Tech Table",
       period: formatPeriod(new Date(2021, 0, 1), new Date(2021, 6, 1)),
       imageUrl: "/assets/images/techtableicon.png",
-    },
+    } ,
     {
       id: 2,
       title: "Freelancer",
@@ -78,12 +78,12 @@ const Board = () => {
       company: "AVRL",
       period: formatPeriod(new Date(2022, 3, 11)),
       imageUrl: "/assets/images/avrl.jpg",
-    },
+    }
   ];
 
   return (
     <motion.article
-      className="relative mt-14 flex w-full max-w-xl shrink-0 flex-col border border-[#32b4f511] bg-[#32b4f513] p-6 text-white shadow-board  md:min-h-[30rem] md:p-8"
+      className="relative mt-14 flex max-w-xl shrink-0 flex-col border border-[#32b4f511] bg-[#32b4f513] p-6 text-white shadow-board  md:min-h-[40rem] md:p-8"
       initial={reducedMotion ? false : { opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -97,31 +97,38 @@ const Board = () => {
             }
       }
     >
-      <div className="m-0 h-full text-[1.1rem] [&_span]:text-[1.2rem] [&_span]:font-semibold">
-        Based out of <span style={{ color: colors.saffron }}>India</span>, I&apos;m
-        an engineer with a passion for all things tech. I enjoy continually
-        learning new concepts and staying up-to-date with the latest tech in
-        this fast-paced environment. Apart from coding, I love to watch{" "}
-        <b>Documentaries</b>, <b>War epics</b>, <b>Thrillers</b> and <b>Biopics</b> &amp; read/listen about&nbsp;
-        <b>Philosophy</b> or <b>Pyschology</b>.
+      <div className="m-0 h-full leading-relaxed [&_span]:text-[1.2rem] [&_span]:font-semibold">
+        Based in <span style={{ color: colors.saffron }}>India</span>, I&apos;m
+        a software engineer passionate about building impactful technology and
+        constantly exploring new ideas in the tech space. I enjoy learning
+        emerging technologies and staying current in this ever-evolving
+        industry.
         <br />
         <br />
-        My <span style={{ color: colors.purp }}>goal</span> is to always
-        improve as a <span style={{ color: colors.yellow }}>programmer</span>{" "}
-        and my intent is to apply the same drive I have for self-improvement to
-        any projects I work on.
+        Beyond coding, I enjoy watching <b>Documentaries</b>, <b>War Epics</b>,{" "}
+        <b>Thrillers</b>, and <b>Biopics</b>, while also reading and listening
+        about <b>Philosophy</b> and <b>Psychology</b>.
         <br />
         <br />
-        On the frontend side, I mostly use{" "}
-        <span style={{ color: colors.cyan }}>React</span> & <span style={{ color: colors.cyan }}>NextJS</span>, while in Backend, I tend to use{" "}
+        My <span style={{ color: colors.purp }}>goal</span> is to continuously
+        grow as an <span style={{ color: colors.yellow }}>engineer</span> and
+        apply that same mindset of improvement and curiosity to every project I
+        work on.
+        <br />
+        <br />
+        On the frontend, I primarily work with{" "}
+        <span style={{ color: colors.cyan }}>React</span> and{" "}
+        <span style={{ color: colors.cyan }}>Next.js</span>, while on the
+        backend I mainly use{" "}
         <span style={{ color: colors.green }}>Node.js</span>.
-        <br/>
-        <br/>
-        I also create <span style={{ color: colors.purp }}>AI</span> powered systems including{" "}
-        <span style={{ color: colors.purp }}>RAG</span> & <span style={{ color: colors.purp }}>Agentic AI</span>.
+        <br />
+        <br />I also build{" "}
+        <span style={{ color: colors.purp }}>AI-powered</span> systems,
+        including <span style={{ color: colors.purp }}>RAG</span> pipelines and{" "}
+        <span style={{ color: colors.purp }}>Agentic AI</span> applications.
       </div>
 
-      <div className="mt-8 flex min-h-16 w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-2 flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
           <Link
             href="https://drive.google.com/file/d/1Y8xAGKCEfj8cNyaOChNbTiIsmxpljbLq/view?usp=sharing"
@@ -133,32 +140,36 @@ const Board = () => {
           </Link>
         </motion.div>
 
-        <motion.div
-          onClick={() => setIsActive((prev) => !prev)}
-          className="relative flex h-[3.3rem] w-full cursor-pointer items-center justify-between rounded border border-accent-violet bg-[#150a339a] p-[0.8rem] sm:w-3/5"
-          whileHover={{ borderColor: "#9655fe" }}
-          whileTap={{ scale: 0.98 }}
-          role="button"
-          tabIndex={0}
-          aria-expanded={isActive}
-          aria-label="Toggle work experience list"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setIsActive((prev) => !prev);
-            }
-          }}
-        >
-          <ExpItem {...exp[exp.length - 1]} />
+        <div className="relative w-full sm:w-3/5">
           <motion.div
-            animate={{ rotate: isActive ? 180 : 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            onClick={() => setIsActive((prev) => !prev)}
+            className="relative z-50 flex h-max cursor-pointer items-center justify-between rounded border border-accent-violet bg-[#150a339a] p-[0.8rem]"
+            whileHover={{ borderColor: "#9655fe" }}
+            whileTap={{ scale: 0.98 }}
+            role="button"
+            tabIndex={0}
+            aria-expanded={isActive}
+            aria-label="Toggle work experience list"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsActive((prev) => !prev);
+              }
+            }}
           >
-            <Arrow className="ml-1 h-6 text-[#662eff]" />
+            <ExpItem {...exp[exp.length - 1]} />
+            <motion.div
+              animate={{ rotate: isActive ? 180 : 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <Arrow className="ml-1 h-6 text-[#662eff]" />
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        <AnimatePresence>{isActive && <ExpList exp={exp} />}</AnimatePresence>
+          <AnimatePresence>
+            {isActive && <ExpList exp={exp} />}
+          </AnimatePresence>
+        </div>
       </div>
 
       <div

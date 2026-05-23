@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import LoaderVisual from "./LoaderVisual";
 import PreLoaderLogo from "./PreLoaderLogo";
@@ -131,6 +132,18 @@ const PreLoaderPage = ({ show = true, onExitComplete }: PreLoaderPageProps) => {
           animate="after"
           exit="exit"
         >
+          <div className="pointer-events-none absolute inset-0" aria-hidden>
+            <Image
+              src="/assets/images/loader_bg.JPEG"
+              alt=""
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-black/90" />
+          </div>
+
           <div
             className="pointer-events-none absolute inset-0 opacity-60"
             style={{
