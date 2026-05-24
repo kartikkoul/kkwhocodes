@@ -54,12 +54,6 @@ const SkillCategoryCard = ({ category, index }: SkillCategoryCardProps) => {
             <span className="text-white/45"> = [</span>
           </h3>
         </div>
-        <span
-          className="shrink-0 rounded-md border px-2 py-0.5 font-mono text-[0.65rem] tabular-nums text-white/50"
-          style={{ borderColor: `${accent}44`, color: accent }}
-        >
-          {items.length}
-        </span>
       </header>
 
       <div className="relative flex flex-wrap gap-2">

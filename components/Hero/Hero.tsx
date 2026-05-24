@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { usePreloader } from "../UI/PreloaderContext";
 import Headline from "./Headline";
 
 const HeroScene = dynamic(() => import("./HeroScene"), {
@@ -11,7 +12,9 @@ const HeroScene = dynamic(() => import("./HeroScene"), {
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const sceneActive = useInView(sectionRef, { amount: 0.08 });
+  const { isPreloading } = usePreloader();
+  const inView = useInView(sectionRef, { amount: 0.08 });
+  const sceneActive = isPreloading || inView;
 
   return (
     <section

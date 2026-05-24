@@ -7,57 +7,32 @@ export type Project = {
   href: string;
   accent: string;
   year: string;
-  /** Upload to public/assets/images/projects/ — e.g. portfolio.webp */
-  image: string;
+  /** Upload to public/assets/videos/projects/ — muted loop .webm */
+  video: string;
 };
 
 export const projects: Project[] = [
   {
-    id: "portfolio",
-    title: "kkwhocodes",
-    tagline: "This cosmic portfolio",
-    description:
-      "A Next.js portfolio with smooth scroll, custom cursor, 3D hero scene, and motion-driven sections — built to feel interactive, not static.",
-    tags: ["Next.js", "Three.js", "Framer Motion", "Tailwind"],
-    href: "https://github.com/kkwhocodes/kkwhocodes",
+    id: "myknowledgebase",
+    title: "My Knowledgebase",
+    tagline: "Personalise a chatbot with your own PDFs and ask questions answered strictly from your documents.",
+    description: "My Knowledgebase is a full-stack Retrieval-Augmented Generation (RAG) based AI-powered application that lets users upload PDF documents to build a personal knowledge base, then ask questions that are answered grounded from the uploaded content only.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "LangChain", "Pinecone", "PostgreSQL", "Prisma", "OpenRouter", "Docker", "AWS", "Vercel"],
+    href: "https://github.com/kartikkoul/rag-pdf-qna",
     accent: "#9655fe",
-    year: "2025",
-    image: "/assets/images/projects/portfolio.webp",
+    year: "2026",
+    video: "/assets/videos/projects/my-knowledge-base.webm",
   },
   {
-    id: "rag-agent",
-    title: "RAG Agent",
-    tagline: "Docs → answers pipeline",
+    id: "sketchmates",
+    title: "SketchMates",
+    tagline: "Draw what you imagine with your mates in real-time 😜",
     description:
-      "An agentic RAG system that ingests documents, retrieves context, and answers with grounded responses — LangChain orchestration with streaming UI.",
-    tags: ["Python", "LangChain", "FastAPI", "React"],
-    href: "https://github.com/kkwhocodes",
-    accent: "#59BEB8",
-    year: "2025",
-    image: "/assets/images/projects/rag-agent.webp",
-  },
-  {
-    id: "realtime-app",
-    title: "Pulse Chat",
-    tagline: "Realtime rooms",
-    description:
-      "Multi-room chat with WebSockets, presence indicators, and optimistic UI — designed for low-latency collaboration.",
-    tags: ["Node.js", "Socket.io", "MongoDB", "Redux"],
-    href: "https://github.com/kkwhocodes",
+      "Sketchmates lets you draw whatever you imagine: together, in real time. Perfect for just goofing around with friends.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Fabric.js", "Framer Motion", "Node.js", "Express", "WebSockets", "Prisma", "PostgreSQL", "Turborepo", "AWS", "Railway"],
+    href: "https://github.com/kartikkoul/sketchmates",
     accent: "#00B2FF",
-    year: "2024",
-    image: "/assets/images/projects/realtime-app.webp",
-  },
-  {
-    id: "devtool",
-    title: "API Forge",
-    tagline: "Mock & test APIs",
-    description:
-      "Spin up mock REST endpoints, inspect payloads, and export OpenAPI specs — speeds up frontend integration.",
-    tags: ["Express", "TypeScript", "PostgreSQL"],
-    href: "https://github.com/kkwhocodes",
-    accent: "#c53683",
-    year: "2024",
-    image: "/assets/images/projects/devtool.webp",
-  },
+    year: "2026",
+    video: "/assets/videos/projects/sketchmates.webm",
+  }
 ];

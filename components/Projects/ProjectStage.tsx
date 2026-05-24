@@ -21,17 +21,15 @@ const ProjectStage = ({ project, direction }: ProjectStageProps) => {
           initial={{
             opacity: 0,
             x: direction >= 0 ? 48 : -48,
-            scale: 1.03,
           }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
+          animate={{ opacity: 1, x: 0 }}
           exit={{
             opacity: 0,
             x: direction >= 0 ? -48 : 48,
-            scale: 0.98,
           }}
           transition={slideTransition}
         >
-          <ProjectImage project={project} priority className="object-cover" />
+          <ProjectImage project={project} priority className="object-contain" />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
             aria-hidden

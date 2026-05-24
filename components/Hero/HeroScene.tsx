@@ -4,6 +4,7 @@ import { useRef, useMemo, type ReactNode } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Stars, MeshDistortMaterial, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
+import { usePreloader } from "../UI/PreloaderContext";
 
 const PARTICLE_COUNT = 10000;
 
@@ -160,9 +161,22 @@ function MouseParallaxGroup({ children }: { children: ReactNode }) {
   return <group ref={groupRef}>{children}</group>;
 }
 
-function Scene() {
+function RenderReadyNotifier({ onReady }: { onReady: () => void }) {
+  const notified = useRef(false);
+
+  useFrame(() => {
+    if (notified.current) return;
+    notified.current = true;
+    onReady();
+  });
+
+  return null;
+}
+
+function Scene({ onReady }: { onReady: () => void }) {
   return (
     <>
+      <RenderReadyNotifier onReady={onReady} />
       <ambientLight intensity={0.15} />
       <pointLight position={[8, 8, 8]} intensity={1.2} color="#59BEB8" />
       <pointLight position={[-8, -4, -4]} intensity={0.9} color="#9655fe" />
@@ -199,6 +213,8 @@ interface HeroSceneProps {
 }
 
 export default function HeroScene({ active = true }: HeroSceneProps) {
+  const { notifyHeroSceneReady } = usePreloader();
+
   return (
     <Canvas
       camera={{ position: [0, 0, 5.5], fov: 55 }}
@@ -208,7 +224,7 @@ export default function HeroScene({ active = true }: HeroSceneProps) {
       frameloop={active ? "always" : "never"}
       style={{ background: "transparent" }}
     >
-      <Scene />
+      <Scene onReady={notifyHeroSceneReady} />
     </Canvas>
   );
 }

@@ -12,7 +12,7 @@ const ProjectsHeadline = () => {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.5 }}
       >
-        {"// selected work"}
+        {"// projects showcase"}
       </motion.p>
 
       <motion.h2

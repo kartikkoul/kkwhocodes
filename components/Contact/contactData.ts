@@ -9,7 +9,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "github",
     label: "GitHub",
-    href: "https://github.com/kkwhocodes",
+    href: "https://github.com/kartikkoul",
     accent: "#9655fe",
   },
   {
@@ -21,7 +21,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/kkwhocodes",
+    href: "https://www.linkedin.com/in/kartikkoul/",
     accent: "#00B2FF",
   },
   {

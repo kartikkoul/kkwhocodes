@@ -17,7 +17,7 @@ const ProjectRail = ({ projects, activeIndex, onSelect }: ProjectRailProps) => {
       role="tablist"
       aria-label="Choose a project"
     >
-      <div className="flex gap-3 overflow-x-auto pb-2 pt-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex gap-3 pb-2 pt-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {projects.map((project, index) => {
           const isActive = index === activeIndex;
           return (

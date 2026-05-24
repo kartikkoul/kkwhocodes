@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "./projectsData";
 
@@ -13,33 +12,32 @@ type ProjectImageProps = {
   variant?: "default" | "compact";
 };
 
-const imageFileName = (src: string) => src.split("/").pop() ?? src;
+const videoFileName = (src: string) => src.split("/").pop() ?? src;
 
 const ProjectImage = ({
   project,
   priority = false,
   className = "object-cover",
-  sizes = "(max-width: 1024px) 100vw, 55vw",
   variant = "default",
 }: ProjectImageProps) => {
   const [loadState, setLoadState] = useState<"loading" | "loaded" | "error">(
     "loading",
   );
-  const activeSrc = useRef(project.image);
+  const activeSrc = useRef(project.video);
 
   useEffect(() => {
-    activeSrc.current = project.image;
+    activeSrc.current = project.video;
     setLoadState("loading");
-  }, [project.image]);
+  }, [project.video]);
 
   const handleLoad = () => {
-    if (activeSrc.current === project.image) {
+    if (activeSrc.current === project.video) {
       setLoadState("loaded");
     }
   };
 
   const handleError = () => {
-    if (activeSrc.current === project.image) {
+    if (activeSrc.current === project.video) {
       setLoadState("error");
     }
   };
@@ -49,7 +47,7 @@ const ProjectImage = ({
       return (
         <div
           className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.06] to-white/[0.02]"
-          title={`Add public${project.image}`}
+          title={`Add public${project.video}`}
         >
           <span
             className="font-montserrat text-2xl font-light opacity-50"
@@ -76,7 +74,7 @@ const ProjectImage = ({
         <p className="max-w-full px-2 font-mono text-[0.65rem] text-white/40">
           Add{" "}
           <span className="break-all text-white/60">
-            public/assets/images/projects/{imageFileName(project.image)}
+            public/assets/videos/projects/{videoFileName(project.video)}
           </span>
         </p>
       </div>
@@ -91,15 +89,17 @@ const ProjectImage = ({
           aria-hidden
         />
       )}
-      <Image
-        key={project.image}
-        src={project.image}
-        alt={`${project.title} preview`}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={className}
-        onLoad={handleLoad}
+      <video
+        key={project.video}
+        src={project.video}
+        className={`absolute inset-0 h-full w-full ${className}`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload={priority ? "auto" : "metadata"}
+        aria-label={`${project.title} preview`}
+        onLoadedData={handleLoad}
         onError={handleError}
       />
     </div>

@@ -1,58 +1,115 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import PreLoaderPage, { PRELOADER_MIN_MS } from "./PreLoaderPage";
+import PreloaderContext from "./PreloaderContext";
 
 interface PreLoaderGateProps {
   children: ReactNode;
 }
 
+function lockPageScroll() {
+  const html = document.documentElement;
+  const { body } = document;
+  const scrollY = window.scrollY;
+
+  body.dataset.scrollLockY = String(scrollY);
+  html.style.overflow = "hidden";
+  body.style.overflow = "hidden";
+  html.style.overscrollBehavior = "none";
+  body.style.touchAction = "none";
+  body.style.position = "fixed";
+  body.style.top = `-${scrollY}px`;
+  body.style.left = "0";
+  body.style.right = "0";
+  body.style.width = "100%";
+}
+
+function unlockPageScroll() {
+  const html = document.documentElement;
+  const { body } = document;
+
+  html.style.overflow = "";
+  body.style.overflow = "";
+  html.style.overscrollBehavior = "";
+  body.style.touchAction = "";
+  body.style.position = "";
+  body.style.top = "";
+  body.style.left = "";
+  body.style.right = "";
+  body.style.width = "";
+  delete body.dataset.scrollLockY;
+
+  window.scrollTo(0, 0);
+}
+
 const PreLoaderGate = ({ children }: PreLoaderGateProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
+  const [ready, setReady] = useState({
+    minElapsed: false,
+    pageLoaded: false,
+    heroSceneReady: false,
+  });
+
+  const notifyHeroSceneReady = useCallback(() => {
+    setReady((prev) =>
+      prev.heroSceneReady ? prev : { ...prev, heroSceneReady: true }
+    );
+  }, []);
 
   useEffect(() => {
-    let minElapsed = false;
-    let pageLoaded = document.readyState === "complete";
+    if (!isLoading) return;
 
-    const finish = () => {
-      if (minElapsed && pageLoaded) {
-        setIsLoading(false);
-        document.body.style.overflow = "";
-      }
-    };
+    lockPageScroll();
+    return () => unlockPageScroll();
+  }, [isLoading]);
 
-    document.body.style.overflow = "hidden";
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      setReady((prev) => ({ ...prev, pageLoaded: true }));
+    }
 
     const minTimer = setTimeout(() => {
-      minElapsed = true;
-      finish();
+      setReady((prev) => ({ ...prev, minElapsed: true }));
     }, PRELOADER_MIN_MS);
 
     const onLoad = () => {
-      pageLoaded = true;
-      finish();
+      setReady((prev) => ({ ...prev, pageLoaded: true }));
     };
 
-    if (!pageLoaded) {
+    if (document.readyState !== "complete") {
       window.addEventListener("load", onLoad, { once: true });
     }
 
     return () => {
       clearTimeout(minTimer);
       window.removeEventListener("load", onLoad);
-      document.body.style.overflow = "";
     };
   }, []);
 
+  useEffect(() => {
+    const { minElapsed, pageLoaded, heroSceneReady } = ready;
+    if (minElapsed && pageLoaded && heroSceneReady) {
+      setIsLoading(false);
+    }
+  }, [ready]);
+
+  const contextValue = useMemo(
+    () => ({ isPreloading: isLoading, notifyHeroSceneReady }),
+    [isLoading, notifyHeroSceneReady]
+  );
+
   return (
-    <>
-      <PreLoaderPage
-        show={isLoading}
-        onExitComplete={() => setShowContent(true)}
-      />
-      {showContent ? children : null}
-    </>
+    <PreloaderContext.Provider value={contextValue}>
+      {children}
+      <PreLoaderPage show={isLoading} />
+    </PreloaderContext.Provider>
   );
 };
 

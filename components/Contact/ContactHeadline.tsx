@@ -26,7 +26,7 @@ const ContactHeadline = () => {
       </h2>
 
       <p className="mt-5 max-w-md font-poppins text-sm font-light leading-relaxed text-white/45 sm:text-base">
-        Drop a message — it lands straight in my inbox. Or find me on socials
+        Drop a message - it lands straight in my inbox. Or find me on socials
         below.
       </p>
     </motion.div>

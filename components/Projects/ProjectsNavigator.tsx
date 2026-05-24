@@ -84,7 +84,7 @@ const ProjectsNavigator = () => {
       </div>
 
       <div className="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 overflow-visible">
           <ProjectStage project={active} direction={direction} />
           <ProjectRail
             projects={projects}

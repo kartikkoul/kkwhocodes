@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 const navLinks = [
   { href: "/#projects", label: "projects()" },
   { href: "/#skills", label: "skills()" },
-  { href: "/", label: "blogs()" },
   { href: "/#about", label: "about()" },
   { href: "/#contact", label: "contact()" },
 ];
