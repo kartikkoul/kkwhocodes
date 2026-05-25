@@ -10,6 +10,8 @@ type ProjectImageProps = {
   sizes?: string;
   /** Rail thumbnails — letter only, no path copy */
   variant?: "default" | "compact";
+  /** When false, shows a static placeholder (saves decoders on inactive rail items). */
+  playVideo?: boolean;
 };
 
 const videoFileName = (src: string) => src.split("/").pop() ?? src;
@@ -19,6 +21,7 @@ const ProjectImage = ({
   priority = false,
   className = "object-cover",
   variant = "default",
+  playVideo = true,
 }: ProjectImageProps) => {
   const [loadState, setLoadState] = useState<"loading" | "loaded" | "error">(
     "loading",
@@ -42,6 +45,22 @@ const ProjectImage = ({
     }
   };
 
+  if (!playVideo) {
+    return (
+      <div
+        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.06] to-white/[0.02]"
+        aria-hidden
+      >
+        <span
+          className={`font-sans font-light opacity-50 ${variant === "compact" ? "text-2xl" : "text-4xl"}`}
+          style={{ color: project.accent }}
+        >
+          {project.title.charAt(0)}
+        </span>
+      </div>
+    );
+  }
+
   if (loadState === "error") {
     if (variant === "compact") {
       return (
@@ -50,7 +69,7 @@ const ProjectImage = ({
           title={`Add public${project.video}`}
         >
           <span
-            className="font-montserrat text-2xl font-light opacity-50"
+            className="font-sans text-2xl font-light opacity-50"
             style={{ color: project.accent }}
             aria-hidden
           >
@@ -66,7 +85,7 @@ const ProjectImage = ({
         style={{ borderColor: `${project.accent}44` }}
       >
         <span
-          className="font-montserrat text-4xl font-light opacity-40"
+          className="font-sans text-4xl font-light opacity-40"
           style={{ color: project.accent }}
         >
           {project.title.charAt(0)}

@@ -10,7 +10,6 @@ export type Project = {
   /** Upload to public/assets/videos/projects/ — muted loop .webm */
   video: string;
 };
-
 export const projects: Project[] = [
   {
     id: "myknowledgebase",
@@ -36,3 +35,4 @@ export const projects: Project[] = [
     video: "/assets/videos/projects/sketchmates.webm",
   }
 ];
+

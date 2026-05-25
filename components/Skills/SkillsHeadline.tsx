@@ -16,7 +16,7 @@ const SkillsHeadline = () => {
       </motion.p>
 
       <motion.h2
-        className="font-montserrat text-[1.35rem] font-extralight leading-snug text-white/80 sm:text-[1.65rem]"
+        className="font-sans text-[1.35rem] font-extralight leading-snug text-white/80 sm:text-[1.65rem]"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
@@ -24,7 +24,7 @@ const SkillsHeadline = () => {
       >
         My core skill is{" "}
         <motion.span
-          className="bg-skills-headline bg-clip-text font-poppins text-[2.4rem] font-semibold leading-tight text-transparent animate-gradient-shift bg-[length:200%_auto] sm:text-[3.25rem]"
+          className="bg-skills-headline text-nowrap bg-clip-text font-sans text-[2.4rem] font-semibold leading-tight text-transparent animate-gradient-shift bg-[length:200%_auto] sm:text-[3.25rem]"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -36,7 +36,7 @@ const SkillsHeadline = () => {
       </motion.h2>
 
       <motion.p
-        className="mx-auto mt-5 max-w-2xl font-poppins text-sm font-light leading-relaxed text-white/45 sm:text-base"
+        className="mx-auto mt-5 max-w-2xl font-sans text-sm font-light leading-relaxed text-white/45 sm:text-base"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

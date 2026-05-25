@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 type FormStatus = "idle" | "sending" | "success" | "error";
 
 const inputClass =
-  "w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 font-poppins text-sm text-white placeholder:text-white/30 outline-none transition-colors duration-300 focus:border-accent-teal/60 focus:ring-1 focus:ring-accent-teal/30";
+  "w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 font-sans text-sm text-white placeholder:text-white/30 outline-none transition-colors duration-300 focus:border-accent-teal/60 focus:ring-1 focus:ring-accent-teal/30";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
@@ -191,7 +191,7 @@ const ContactForm = () => {
       <motion.button
         type="submit"
         disabled={status === "sending" || !turnstileToken || !turnstileSiteKey}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-accent-violetLight/80 bg-accent-violetLight/15 px-5 py-3 font-poppins text-sm font-medium text-white transition-shadow duration-300 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-accent-violetLight/80 bg-accent-violetLight/15 px-5 py-3 font-sans text-sm font-medium text-white transition-shadow duration-300 disabled:cursor-not-allowed disabled:opacity-50"
         style={{ boxShadow: "0 0 24px #9655fe33" }}
         whileHover={
           status === "sending" ? undefined : { scale: 1.02, boxShadow: "0 0 32px #9655fe55" }

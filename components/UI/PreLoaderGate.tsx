@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -9,6 +10,12 @@ import {
 } from "react";
 import PreLoaderPage, { PRELOADER_MIN_MS } from "./PreLoaderPage";
 import PreloaderContext from "./PreloaderContext";
+
+/** Preloader is tied to the hero 3D scene: only run on the home page. */
+function useIsHomePage() {
+  const pathname = usePathname();
+  return pathname === "/";
+}
 
 interface PreLoaderGateProps {
   children: ReactNode;
@@ -50,12 +57,19 @@ function unlockPageScroll() {
 }
 
 const PreLoaderGate = ({ children }: PreLoaderGateProps) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const isHome = useIsHomePage();
+  const [isLoading, setIsLoading] = useState(isHome);
   const [ready, setReady] = useState({
     minElapsed: false,
     pageLoaded: false,
     heroSceneReady: false,
   });
+
+  useEffect(() => {
+    if (!isHome) {
+      setIsLoading(false);
+    }
+  }, [isHome]);
 
   const notifyHeroSceneReady = useCallback(() => {
     setReady((prev) =>
@@ -64,13 +78,15 @@ const PreLoaderGate = ({ children }: PreLoaderGateProps) => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
+    if (!isHome || !isLoading) return;
 
     lockPageScroll();
     return () => unlockPageScroll();
-  }, [isLoading]);
+  }, [isHome, isLoading]);
 
   useEffect(() => {
+    if (!isHome) return;
+
     if (document.readyState === "complete") {
       setReady((prev) => ({ ...prev, pageLoaded: true }));
     }
@@ -91,24 +107,28 @@ const PreLoaderGate = ({ children }: PreLoaderGateProps) => {
       clearTimeout(minTimer);
       window.removeEventListener("load", onLoad);
     };
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
+    if (!isHome) return;
+
     const { minElapsed, pageLoaded, heroSceneReady } = ready;
     if (minElapsed && pageLoaded && heroSceneReady) {
       setIsLoading(false);
     }
-  }, [ready]);
+  }, [ready, isHome]);
+
+  const showPreloader = isHome && isLoading;
 
   const contextValue = useMemo(
-    () => ({ isPreloading: isLoading, notifyHeroSceneReady }),
-    [isLoading, notifyHeroSceneReady]
+    () => ({ isPreloading: showPreloader, notifyHeroSceneReady }),
+    [showPreloader, notifyHeroSceneReady]
   );
 
   return (
     <PreloaderContext.Provider value={contextValue}>
       {children}
-      <PreLoaderPage show={isLoading} />
+      <PreLoaderPage show={showPreloader} />
     </PreloaderContext.Provider>
   );
 };

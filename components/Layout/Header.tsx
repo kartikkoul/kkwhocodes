@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { getSectionIdFromHref, scrollToSection } from "@/lib/scroll";
+import { useLenis } from "../UI/LenisContext";
 
 const navLinks = [
   { href: "/#projects", label: "projects()" },
@@ -28,6 +31,23 @@ const itemVariants = {
 };
 
 const Header = () => {
+  const pathname = usePathname();
+  const lenis = useLenis();
+
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (pathname !== "/") return;
+
+    const sectionId = getSectionIdFromHref(href);
+    if (!sectionId || !document.getElementById(sectionId)) return;
+
+    event.preventDefault();
+    scrollToSection(lenis, sectionId);
+    window.history.pushState(null, "", href);
+  };
+
   return (
     <header className="mx-auto mt-2 flex w-[90%] bg-transparent items-end justify-between font-righteous text-white max-[500px]:flex-col-reverse max-[500px]:items-center max-[500px]:justify-center">
       <nav>
@@ -49,7 +69,9 @@ const Header = () => {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href={href}>{label}</Link>
+              <Link href={href} onClick={(e) => handleNavClick(e, href)}>
+                {label}
+              </Link>
             </motion.li>
           ))}
         </motion.ul>

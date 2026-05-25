@@ -14,7 +14,7 @@ const slideTransition = { type: "spring" as const, stiffness: 320, damping: 32 }
 const ProjectStage = ({ project, direction }: ProjectStageProps) => {
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-black/40 sm:aspect-[16/9]">
-      <AnimatePresence initial={false} mode="sync">
+      <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={project.id}
           className="absolute inset-0"
@@ -43,10 +43,10 @@ const ProjectStage = ({ project, direction }: ProjectStageProps) => {
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50">
               {project.year}
             </p>
-            <h3 className="font-montserrat text-2xl font-light text-white sm:text-3xl">
+            <h3 className="font-sans text-2xl font-light text-white sm:text-3xl">
               {project.title}
             </h3>
-            <p className="mt-1 font-poppins text-sm text-white/60">
+            <p className="mt-1 font-sans text-sm text-white/60">
               {project.tagline}
             </p>
           </div>

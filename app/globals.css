@@ -2,21 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Righteous&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
-
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  scrollbar-gutter: stable;
+}
+
+html.lenis-active {
+  scroll-behavior: auto;
+}
+
+html.modal-open {
+  overflow: hidden;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   background: #000;
   min-width: 338px;
+  overflow-x: hidden;
 }
 
 a {
@@ -46,9 +52,19 @@ a {
   animation: gradient-shift 4s ease infinite;
 }
 
-body.custom-cursor-active,
-body.custom-cursor-active * {
-  cursor: none !important;
+body.custom-cursor-active {
+  cursor: none;
+}
+
+body.custom-cursor-active a,
+body.custom-cursor-active button,
+body.custom-cursor-active input,
+body.custom-cursor-active textarea,
+body.custom-cursor-active select,
+body.custom-cursor-active label,
+body.custom-cursor-active [role="button"],
+body.custom-cursor-active [data-cursor="hover"] {
+  cursor: none;
 }
 
 /* Hide native scrollbar — cosmic thumb rendered in CustomScrollbar */
@@ -74,6 +90,20 @@ html::-webkit-scrollbar {
 
 .scrollbar-aurora {
   animation: scrollbar-aurora 4.5s ease-in-out infinite;
+}
+
+@keyframes preloader-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.preloader-progress-bar {
+  transform-origin: left center;
+  animation: preloader-progress linear forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -153,6 +183,7 @@ html::-webkit-scrollbar {
 
 .about-frame-spin {
   animation: about-frame-spin 30s linear infinite;
+  transform-origin: center center;
   will-change: transform;
 }
 
@@ -168,4 +199,267 @@ html::-webkit-scrollbar {
 
 .about-frame-float {
   animation: about-frame-float 5s ease-in-out infinite;
+}
+
+/* About board — text wraps around inline profile frame (< lg) */
+.about-board-frame-wrap {
+  shape-outside: ellipse(44% 46% at 50% 48%);
+  shape-margin: 0.25rem;
+}
+
+/* About section — ambient background (Board / DisplayFrame unchanged) */
+.about-bg-base {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, #1a1038 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 80% 100%, #0a1a28 0%, transparent 50%),
+    linear-gradient(180deg, #030308 0%, #000 45%, #050510 100%);
+}
+
+.about-bg-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(89, 190, 184, 0.14) 1px,
+    transparent 0
+  );
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 20%, transparent 72%);
+}
+
+.about-bg-orb {
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform, opacity;
+}
+
+.about-bg-orb--teal {
+  background: radial-gradient(circle, rgba(89, 190, 184, 0.22) 0%, transparent 68%);
+  animation: about-orb-drift-a 18s ease-in-out infinite;
+}
+
+.about-bg-orb--violet {
+  background: radial-gradient(circle, rgba(77, 52, 193, 0.28) 0%, transparent 70%);
+  animation: about-orb-drift-b 22s ease-in-out infinite;
+}
+
+.about-bg-orb--magenta {
+  background: radial-gradient(
+    circle,
+    rgba(197, 54, 131, 0.18) 0%,
+    rgba(150, 85, 254, 0.12) 40%,
+    transparent 70%
+  );
+  animation: about-orb-drift-c 20s ease-in-out infinite;
+}
+
+.about-bg-orb--cyan {
+  background: radial-gradient(circle, rgba(0, 178, 255, 0.14) 0%, transparent 68%);
+  animation: about-orb-drift-a 24s ease-in-out infinite reverse;
+}
+
+.about-bg-bridge {
+  background: radial-gradient(
+    ellipse 100% 80% at 50% 50%,
+    rgba(89, 190, 184, 0.06) 0%,
+    rgba(150, 85, 254, 0.04) 45%,
+    transparent 72%
+  );
+  filter: blur(24px);
+}
+
+.about-bg-vignette {
+  background: radial-gradient(
+    ellipse 95% 85% at 50% 50%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.about-bg-ring {
+  border: 1px solid rgba(89, 190, 184, 0.2);
+  border-radius: 50%;
+  box-shadow:
+    0 0 24px rgba(89, 190, 184, 0.08),
+    inset 0 0 20px rgba(150, 85, 254, 0.06);
+  animation: about-ring-pulse 6s ease-in-out infinite;
+}
+
+.about-bg-ring--sm {
+  border-color: rgba(150, 85, 254, 0.25);
+}
+
+.about-bg-ring--delay-a {
+  animation-delay: 2s;
+}
+
+.about-bg-ring--delay-b {
+  animation-delay: 4s;
+}
+
+.about-bg-lines {
+  background-image: repeating-linear-gradient(
+    -35deg,
+    transparent,
+    transparent 48px,
+    rgba(89, 190, 184, 0.035) 48px,
+    rgba(89, 190, 184, 0.035) 49px
+  );
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 15%, transparent 70%);
+}
+
+.about-bg-horizon {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(89, 190, 184, 0.18),
+    rgba(150, 85, 254, 0.14),
+    transparent
+  );
+  opacity: 0.65;
+}
+
+.about-bg-arc {
+  border: 1px solid rgba(89, 190, 184, 0.12);
+  border-radius: 50%;
+  opacity: 0.45;
+}
+
+.about-bg-arc--left {
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  transform: rotate(-25deg);
+  animation: about-arc-drift 14s ease-in-out infinite;
+}
+
+.about-bg-arc--right {
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-color: rgba(150, 85, 254, 0.15);
+  transform: rotate(-25deg);
+  animation: about-arc-drift 16s ease-in-out infinite reverse;
+}
+
+.about-bg-code {
+  position: absolute;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 600;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  animation: about-code-float 8s ease-in-out infinite;
+}
+
+.about-bg-code--bracket {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  color: rgba(89, 190, 184, 0.07);
+}
+
+.about-bg-code--slash {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: rgba(150, 85, 254, 0.1);
+  animation-delay: 1.5s;
+}
+
+.about-bg-scatter {
+  background-image:
+    radial-gradient(circle at 12% 22%, rgba(89, 190, 184, 0.55) 1px, transparent 1px),
+    radial-gradient(circle at 78% 18%, rgba(150, 85, 254, 0.45) 1px, transparent 1px),
+    radial-gradient(circle at 88% 72%, rgba(0, 178, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 22% 78%, rgba(197, 54, 131, 0.35) 1px, transparent 1px),
+    radial-gradient(circle at 52% 12%, rgba(89, 190, 184, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 38% 88%, rgba(150, 85, 254, 0.35) 1px, transparent 1px),
+    radial-gradient(circle at 65% 55%, rgba(0, 178, 255, 0.25) 1px, transparent 1px);
+  background-size: 100% 100%;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 25%, transparent 78%);
+}
+
+@keyframes about-arc-drift {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: rotate(-25deg) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: rotate(-20deg) scale(1.06);
+  }
+}
+
+@keyframes about-code-float {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes about-orb-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(3%, 4%) scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes about-orb-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-4%, -3%) scale(1.08);
+  }
+}
+
+@keyframes about-orb-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-2%, 5%);
+    opacity: 1;
+  }
+}
+
+@keyframes about-ring-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-bg-orb,
+  .about-bg-ring,
+  .about-bg-arc,
+  .about-bg-code {
+    animation: none;
+  }
+}
+
+/* Standalone display frame — vertical nudge to align with board center */
+.about-display-standalone {
+  margin-top: -0.5rem;
+}
+
+@media (min-width: 1280px) {
+  .about-display-standalone {
+    margin-top: 0;
+  }
 }

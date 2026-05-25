@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { useLenis } from "./LenisContext";
 
 const TRACK_INSET = 48;
 const MIN_THUMB = 56;
@@ -18,60 +19,88 @@ const initialMetrics: ScrollMetrics = {
 };
 
 export default function CustomScrollbar() {
-  const [metrics, setMetrics] = useState<ScrollMetrics>(initialMetrics);
+  const lenis = useLenis();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
+  const metricsRef = useRef<ScrollMetrics>(initialMetrics);
+
+  const applyMetrics = useCallback(() => {
+    const root = rootRef.current;
+    const thumb = thumbRef.current;
+    if (!root || !thumb) return;
+
+    const { visible, thumbHeight, thumbTop } = metricsRef.current;
+    root.style.opacity = visible ? "1" : "0";
+    thumb.style.height = `${thumbHeight}px`;
+    thumb.style.transform = `translate3d(0, ${thumbTop}px, 0)`;
+  }, []);
 
   const update = useCallback(() => {
     const doc = document.documentElement;
     const scrollHeight = doc.scrollHeight;
     const clientHeight = doc.clientHeight;
-    const scrollTop = doc.scrollTop;
+    const scrollTop = lenis ? lenis.scroll : doc.scrollTop;
     const maxScroll = scrollHeight - clientHeight;
 
     if (maxScroll <= 0) {
-      setMetrics(initialMetrics);
+      metricsRef.current = initialMetrics;
+      applyMetrics();
       return;
     }
 
     const trackHeight = clientHeight - TRACK_INSET * 2;
     const thumbHeight = Math.max(
       MIN_THUMB,
-      (clientHeight / scrollHeight) * trackHeight
+      (clientHeight / scrollHeight) * trackHeight,
     );
     const maxThumbTop = trackHeight - thumbHeight;
-    const thumbTop =
-      TRACK_INSET + (scrollTop / maxScroll) * maxThumbTop;
+    const thumbTop = TRACK_INSET + (scrollTop / maxScroll) * maxThumbTop;
 
-    setMetrics({
+    metricsRef.current = {
       visible: true,
       thumbHeight,
       thumbTop,
-    });
-  }, []);
+    };
+    applyMetrics();
+  }, [applyMetrics, lenis]);
 
   useEffect(() => {
-    update();
+    let rafId = 0;
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(update);
+    };
 
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    const observer = new ResizeObserver(update);
+    scheduleUpdate();
+
+    if (lenis) {
+      lenis.on("scroll", scheduleUpdate);
+    } else {
+      window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    }
+    window.addEventListener("resize", scheduleUpdate);
+
+    const observer = new ResizeObserver(scheduleUpdate);
     observer.observe(document.documentElement);
-    observer.observe(document.body);
 
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      cancelAnimationFrame(rafId);
+      if (lenis) {
+        lenis.off("scroll", scheduleUpdate);
+      } else {
+        window.removeEventListener("scroll", scheduleUpdate);
+      }
+      window.removeEventListener("resize", scheduleUpdate);
       observer.disconnect();
     };
-  }, [update]);
-
-  if (!metrics.visible) return null;
+  }, [lenis, update]);
 
   return (
     <div
-      className="pointer-events-none fixed right-0 top-0 z-[10] hidden h-[100dvh] w-5 sm:block"
+      ref={rootRef}
+      className="pointer-events-none fixed right-0 top-0 z-[10] hidden h-[100dvh] w-5 opacity-0 sm:block"
       aria-hidden
     >
-      {/* Track — faint nebula line */}
       <div
         className="absolute right-[11px] w-px rounded-full opacity-60"
         style={{
@@ -83,12 +112,12 @@ export default function CustomScrollbar() {
         }}
       />
 
-      {/* Thumb */}
       <div
+        ref={thumbRef}
         className="absolute right-[7px] w-[10px] will-change-transform"
         style={{
-          height: metrics.thumbHeight,
-          transform: `translateY(${metrics.thumbTop}px)`,
+          height: MIN_THUMB,
+          transform: `translate3d(0, ${TRACK_INSET}px, 0)`,
         }}
       >
         <div className="scrollbar-aurora absolute -inset-x-1 inset-y-0 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(150,85,254,0.55)_0%,rgba(89,190,184,0.25)_45%,transparent_72%)] blur-[7px]" />

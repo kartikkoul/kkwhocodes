@@ -14,7 +14,7 @@ const trailDots = Array.from({ length: DOT_COUNT }, (_, i) => ({
 export default function LoaderVisual() {
   return (
     <div
-      className="relative flex h-[min(52vw,280px)] w-[min(52vw,280px)] items-center justify-center"
+      className="relative flex h-[min(28vw,140px)] w-[min(28vw,140px)] items-center justify-center md:h-[min(52vw,280px)] md:w-[min(52vw,280px)]"
       aria-hidden
     >
       <motion.div

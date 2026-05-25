@@ -1,10 +1,24 @@
 "use client";
 
-import { useRef, useMemo, type ReactNode } from "react";
+import { useRef, useMemo, useState, useEffect, type ReactNode } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Stars, MeshDistortMaterial, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 import { usePreloader } from "../UI/PreloaderContext";
+
+function useIsNarrowViewport() {
+  const [narrow, setNarrow] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 500px)");
+    const update = () => setNarrow(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return narrow;
+}
 
 const PARTICLE_COUNT = 10000;
 
@@ -71,7 +85,7 @@ function ParticleField() {
   );
 }
 
-function WireTorusKnot() {
+function WireTorusKnot({ narrow }: { narrow: boolean }) {
   const ref = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -83,7 +97,7 @@ function WireTorusKnot() {
 
   return (
     <Float speed={2.5} rotationIntensity={1.2} floatIntensity={2}>
-      <mesh ref={ref} position={[1.8, 0.2, 0]}>
+      <mesh ref={ref} position={narrow ? [0.35, 0.15, 0] : [1.8, 0.2, 0]}>
         <torusKnotGeometry args={[0.75, 0.22, 128, 16, 2, 3]} />
         <meshStandardMaterial
           color="#9655fe"
@@ -96,7 +110,7 @@ function WireTorusKnot() {
   );
 }
 
-function DistortedSphere() {
+function DistortedSphere({ narrow }: { narrow: boolean }) {
   const ref = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -106,7 +120,7 @@ function DistortedSphere() {
 
   return (
     <Float speed={1.8} floatIntensity={1.8}>
-      <mesh ref={ref} position={[-1.6, 0.8, -0.5]}>
+      <mesh ref={ref} position={narrow ? [-0.55, 0.65, -0.5] : [-1.6, 0.8, -0.5]}>
         <icosahedronGeometry args={[1.1, 4]} />
         <MeshDistortMaterial
           color="#59BEB8"
@@ -173,7 +187,13 @@ function RenderReadyNotifier({ onReady }: { onReady: () => void }) {
   return null;
 }
 
-function Scene({ onReady }: { onReady: () => void }) {
+function Scene({
+  onReady,
+  narrow,
+}: {
+  onReady: () => void;
+  narrow: boolean;
+}) {
   return (
     <>
       <RenderReadyNotifier onReady={onReady} />
@@ -182,8 +202,8 @@ function Scene({ onReady }: { onReady: () => void }) {
       <pointLight position={[-8, -4, -4]} intensity={0.9} color="#9655fe" />
       <pointLight position={[0, -6, 4]} intensity={0.5} color="#00B2FF" />
       <Sparkles
-        count={180}
-        scale={10}
+        count={narrow ? 120 : 180}
+        scale={narrow ? 7 : 10}
         size={2.5}
         speed={0.5}
         color="#59BEB8"
@@ -192,7 +212,7 @@ function Scene({ onReady }: { onReady: () => void }) {
       <Stars
         radius={40}
         depth={40}
-        count={1500}
+        count={narrow ? 900 : 1500}
         factor={3}
         saturation={0.2}
         fade
@@ -200,8 +220,8 @@ function Scene({ onReady }: { onReady: () => void }) {
       />
       <MouseParallaxGroup>
         <ParticleField />
-        <WireTorusKnot />
-        <DistortedSphere />
+        <WireTorusKnot narrow={narrow} />
+        <DistortedSphere narrow={narrow} />
         <SpinningRing />
       </MouseParallaxGroup>
     </>
@@ -214,17 +234,21 @@ interface HeroSceneProps {
 
 export default function HeroScene({ active = true }: HeroSceneProps) {
   const { notifyHeroSceneReady } = usePreloader();
+  const narrow = useIsNarrowViewport();
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 5.5], fov: 55 }}
-      className="h-full w-full"
+      camera={{
+        position: [0, 0, narrow ? 6.2 : 5.5],
+        fov: narrow ? 62 : 55,
+      }}
+      className="!h-full !w-full touch-none"
       gl={{ antialias: true, alpha: true }}
       dpr={active ? [1, 1.5] : 1}
       frameloop={active ? "always" : "never"}
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: "100%", height: "100%" }}
     >
-      <Scene onReady={notifyHeroSceneReady} />
+      <Scene onReady={notifyHeroSceneReady} narrow={narrow} />
     </Canvas>
   );
 }

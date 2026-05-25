@@ -10,7 +10,7 @@ interface ExpListProps {
 const ExpList = ({ exp }: ExpListProps) => {
   return (
     <motion.ul
-      className="absolute bottom-full right-0 z-50 mb-2 flex w-full flex-col"
+      className="absolute bottom-full right-0 z-10 mb-2 flex w-full flex-col"
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.95 }}

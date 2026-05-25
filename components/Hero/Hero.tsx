@@ -19,10 +19,10 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-[90vh] items-center justify-center overflow-hidden bg-hero-gradient max-[500px]:h-[60vh]"
+      className="relative flex h-[90vh] items-center justify-center overflow-hidden bg-hero-gradient max-[500px]:h-[80vh] max-[500px]:min-h-[36rem]"
     >
       <div
-        className="pointer-events-none absolute inset-0 z-0 top-0"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full min-w-full"
         aria-hidden
       >
         <HeroScene active={sceneActive} />

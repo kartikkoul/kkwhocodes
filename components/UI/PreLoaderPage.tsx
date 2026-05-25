@@ -126,7 +126,7 @@ const PreLoaderPage = ({ show = true, onExitComplete }: PreLoaderPageProps) => {
           role="status"
           aria-label="Loading"
           aria-live="polite"
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black max-md:items-start max-md:justify-start max-md:pt-10"
           variants={pageVariants}
           initial="before"
           animate="after"
@@ -152,8 +152,8 @@ const PreLoaderPage = ({ show = true, onExitComplete }: PreLoaderPageProps) => {
             }}
           />
 
-          <div className="relative z-10 grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-8 md:grid-cols-2 md:gap-8 md:px-16 lg:px-24">
-            <div className="flex flex-col gap-6">
+          <div className="relative z-10 w-full max-w-6xl px-8 md:grid md:grid-cols-2 md:items-center md:gap-8 md:px-16 lg:px-24">
+            <motion.div className="flex flex-col gap-6 max-md:pr-28">
               <motion.div
                 variants={headlineVariants}
                 initial="before"
@@ -172,10 +172,10 @@ const PreLoaderPage = ({ show = true, onExitComplete }: PreLoaderPageProps) => {
                 dotVariant={dotVariant}
                 enterKVariant={enterKVariant}
               />
-            </div>
+            </motion.div>
 
             <motion.div
-              className="flex justify-center md:justify-end"
+              className="absolute right-6 top-0 z-20 md:static md:flex md:justify-end"
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
@@ -197,7 +197,7 @@ const PreLoaderPage = ({ show = true, onExitComplete }: PreLoaderPageProps) => {
                 style={{ boxShadow: "0 0 8px #59BEB8" }}
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: progress / 100 }}
-                transition={{ ease: "linear", duration: 0.1 }}
+                transition={{ ease: "easeOut", duration: 0.1 }}
               />
             </div>
           </div>

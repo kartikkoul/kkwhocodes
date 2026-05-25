@@ -9,7 +9,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative flex min-h-screen w-full flex-col px-6 py-16 font-poppins sm:px-12 lg:px-16"
+      className="relative flex min-h-screen w-full flex-col px-6 py-16 sm:px-12 lg:px-16"
     >
       <motion.p
         className="absolute left-6 top-8 z-10 m-0 text-[1.65rem] font-semibold text-white sm:left-12 sm:text-[2rem] lg:left-16"
@@ -33,7 +33,7 @@ const Contact = () => {
         aria-hidden
       />
 
-      <div className="mx-auto mt-24 flex w-full max-w-6xl flex-col gap-12 lg:mt-28 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+      <div className="mx-auto mt-24 flex w-full items-center max-w-6xl flex-col gap-12 lg:mt-28 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="flex-1">
           <ContactHeadline />
           <SocialLinks />

@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Outer from "../SVGs/About/DisplayFrame/Outer.svg";
 import Inner from "../SVGs/About/DisplayFrame/Inner.svg";
+import OuterGlow from "./OuterGlow";
 import { useReducedMotion } from "../Utils/useReducedMotion";
 import Image from "next/image";
 import { useId } from "react";
@@ -21,35 +21,64 @@ const PHOTO = {
   zoom: 1.8,
 } as const;
 
-const frameSize =
-  "h-48 w-48 md:h-80 md:w-80 lg:h-[28rem] lg:w-[28rem]";
+const sizePresets = {
+  standalone: {
+    shell:
+      "h-52 w-52 sm:h-64 sm:w-64 md:h-80 md:w-80 lg:h-[24rem] lg:w-[24rem] xl:h-[32rem] xl:w-[32rem]",
+    frame:
+      "h-40 w-40 sm:h-48 sm:w-48 md:h-64 md:w-64 lg:h-80 lg:w-80 xl:h-[30rem] xl:w-[30rem]",
+    outer:
+      "h-52 w-52 sm:h-60 sm:w-60 md:h-[19rem] md:w-[19rem] lg:h-[23rem] lg:w-[23rem] xl:h-[32rem] xl:w-[32rem]",
+    imageSizes:
+      "(max-width: 640px) 10rem, (max-width: 1024px) 10rem, 28rem" as const,
+  },
+  inline: {
+    shell: "h-[13rem] w-[14rem] sm:h-64 sm:w-68",
+    frame: "h-[13rem] w-[13rem] sm:h-60 sm:w-60",
+    outer: "h-[14rem] w-[14rem] sm:h-[16rem] sm:w-[16rem]",
+    imageSizes: "(max-width: 640px) 6rem, 8rem" as const,
+  },
+} as const;
 
-const DisplayFrame = () => {
+type DisplayFrameProps = {
+  variant?: keyof typeof sizePresets;
+  className?: string;
+};
+
+const DisplayFrame = ({
+  variant = "standalone",
+  className = "",
+}: DisplayFrameProps) => {
   const reducedMotion = useReducedMotion();
   const clipId = useId();
+  const { shell, frame, outer, imageSizes } = sizePresets[variant];
+  const isInline = variant === "inline";
 
   return (
     <motion.div
-      className="relative flex w-full max-w-md items-center justify-center py-8 md:max-w-lg md:py-0 xl:max-w-none"
-      initial={reducedMotion ? false : { opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ type: "spring", stiffness: 80, damping: 16 }}
+      className={`relative flex shrink-0 items-center justify-center overflow-visible ${
+        isInline
+          ? "w-auto"
+          : "w-full py-2 sm:py-4 lg:w-auto lg:py-0"
+      } ${className}`}
     >
       <div
-        className={`absolute right-8 z-10 md:right-16 lg:right-24 xl:right-32 ${
-          reducedMotion ? "" : "about-frame-spin"
-        }`}
+        className={`relative flex items-center justify-center overflow-visible ${shell}`}
       >
-        <Outer className="h-56 w-56 md:h-[22rem] md:w-[22rem] lg:h-[30rem] lg:w-[30rem]" />
-      </div>
+        <div
+          className={`absolute z-0 flex items-center justify-center overflow-visible ${
+            isInline ? "-inset-[10%]" : "-inset-[14%]"
+          } ${reducedMotion ? "" : "about-frame-spin"}`}
+          aria-hidden
+        >
+          <OuterGlow className={`${outer} shrink-0`} />
+        </div>
 
-      <div
-        className={`absolute right-10 z-20 md:right-20 lg:right-28 xl:right-36 ${
-          reducedMotion ? "" : "about-frame-float"
-        }`}
-      >
-        <div className={`relative ${frameSize}`}>
+        <div
+          className={`relative z-10 ${frame} ${
+            reducedMotion ? "" : "about-frame-float"
+          }`}
+        >
           <Inner className="h-full w-full" aria-hidden />
 
           <svg className="absolute h-0 w-0" aria-hidden>
@@ -63,7 +92,11 @@ const DisplayFrame = () => {
             </defs>
           </svg>
           <div
-            className="absolute inset-0 left-10 top-10"
+            className={
+              isInline
+                ? "absolute inset-0 left-[12%] top-[12%]"
+                : "absolute inset-0 left-[12%] top-[12%] sm:left-[14%] sm:top-[14%] md:left-10 md:top-10"
+            }
             style={{ clipPath: `url(#${clipId})` }}
           >
             <div
@@ -79,7 +112,7 @@ const DisplayFrame = () => {
                 src="/assets/images/about_image.JPEG"
                 alt="Your photo here"
                 fill
-                sizes="(max-width: 768px) 12rem, (max-width: 1024px) 20rem, 28rem"
+                sizes={imageSizes}
                 className="object-cover"
                 style={{ objectPosition: PHOTO.objectPosition }}
               />
