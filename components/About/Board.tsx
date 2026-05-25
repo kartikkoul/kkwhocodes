@@ -9,6 +9,7 @@ import ExpList from "./ExpList";
 import reducePeriodInMonths from "../Utils/date";
 import { useReducedMotion } from "../Utils/useReducedMotion";
 import DisplayFrame from "./DisplayFrame";
+import { expData } from "./expData";
 
 const colors = {
   cyan: "#00B2FF",
@@ -18,70 +19,13 @@ const colors = {
   yellow: "#fff500",
 } as const;
 
-const stack = ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "Figma"];
-
-const formatPeriod = (date1: Date, date2?: Date): string => {
-  const leftParts = date1.toDateString().split(" ");
-  const leftBound = `${leftParts[1]} ${leftParts[3]}`;
-
-  let rightBound: string;
-  let period: number;
-
-  if (date2 instanceof Date) {
-    const rightParts = date2.toDateString().split(" ");
-    rightBound = `${rightParts[1]} ${rightParts[3]}`;
-    period = Math.floor(
-      Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24) / 30,
-    );
-  } else {
-    const presentDate = new Date();
-    rightBound = "Present";
-    period = Math.floor(
-      Math.abs(presentDate.getTime() - date1.getTime()) /
-        (1000 * 60 * 60 * 24) /
-        30,
-    );
-  }
-
-  let periodString: string;
-  if (period > 12) {
-    const { months, years } = reducePeriodInMonths(period);
-    periodString = `${years} years, ${months} months`;
-  } else {
-    periodString = `${period} months`;
-  }
-
-  return `${leftBound} - ${rightBound} (${periodString})`;
-};
 
 const Board = () => {
   const [isActive, setIsActive] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
   const reducedMotion = useReducedMotion();
 
-  const exp: ExpItemProps[] = [
-    {
-      id: 1,
-      title: "Web Developer",
-      company: "Tech Table",
-      period: formatPeriod(new Date(2021, 0, 1), new Date(2021, 6, 1)),
-      imageUrl: "/assets/images/techtableicon.png",
-    } ,
-    {
-      id: 2,
-      title: "Freelancer",
-      company: "Self-Employed",
-      period: formatPeriod(new Date(2021, 7, 1), new Date(2022, 3, 11)),
-      imageUrl: "/assets/images/stay-at-home.png",
-    },
-    {
-      id: 3,
-      title: "SDE-1",
-      company: "AVRL",
-      period: formatPeriod(new Date(2022, 3, 11)),
-      imageUrl: "/assets/images/avrl.jpg",
-    }
-  ];
+  const exp: ExpItemProps[] = expData;
 
   return (
     <motion.article

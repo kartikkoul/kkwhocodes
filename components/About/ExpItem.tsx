@@ -14,7 +14,7 @@ const ExpItem = ({ title, company, period, imageUrl }: ExpItemProps) => {
       <div className="min-w-0 flex-1">
         <h3 className="m-0 text-[0.9rem] font-medium leading-snug text-[#bba2ff] [text-shadow:0px_0px_1px_#bba2ff] sm:text-[1rem]">
           {title}{" "}
-          <small className="text-[0.85em]">at {company}</small>
+          <small className="text-[0.85em]">at <span className="text-nowrap">{company}</span></small>
         </h3>
         <p className="m-0 text-[0.6rem] leading-tight text-[#817997] sm:text-[0.65rem]">
           {period}
