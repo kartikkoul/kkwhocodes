@@ -1,16 +1,16 @@
-# Kartik Koul — Portfolio
+# My Portfolio Website
 
 Personal portfolio site for [kartikkoul.com](https://kartikkoul.com). A single-page experience with a 3D hero, experience timeline, skills grid, project showcase, and a contact form with bot protection.
 
 ## Features
 
-- **Hero** — React Three Fiber scene with animated headline
-- **About** — Experience board with scroll-driven reveals
-- **Skills** — Categorized skill chips
-- **Projects** — Video-backed project rail with live links
-- **Contact** — Form backed by Gmail SMTP and Cloudflare Turnstile
-- **SEO** — Open Graph / Twitter images, sitemap, robots, and JSON-LD
-- **UX** — Lenis smooth scroll, custom cursor, preloader, and reduced-motion support
+- **Hero** : React Three Fiber scene with animated headline
+- **About** : Experience board with scroll-driven reveals
+- **Skills** : Categorized skill chips
+- **Projects** : Video-backed project rail with live links
+- **Contact** : Form backed by Gmail SMTP and Cloudflare Turnstile
+- **SEO** : Open Graph / Twitter images, sitemap, robots, and JSON-LD
+- **UX** : Lenis smooth scroll, custom cursor, preloader, and reduced-motion support
 
 ## Tech stack
 
@@ -85,11 +85,11 @@ public/assets/       # Images, videos, resume PDF
 
 Content is driven by data files you can edit without touching layout code:
 
-- `lib/site.ts` — Site name, title, description, SEO keywords
-- `components/About/expData.ts` — Experience entries
-- `components/Skills/skillsData.ts` — Skill categories
-- `components/Projects/projectsData.ts` — Projects (add `.webm` loops under `public/assets/videos/projects/`)
-- `components/Contact/contactData.ts` — Social links
+- `lib/site.ts` :- Site name, title, description, SEO keywords
+- `components/About/expData.ts` :- Experience entries
+- `components/Skills/skillsData.ts` :- Skill categories
+- `components/Projects/projectsData.ts` :- Projects (add `.webm` loops under `public/assets/videos/projects/`)
+- `components/Contact/contactData.ts` :- Social links
 
 ## Scripts
 
@@ -106,7 +106,7 @@ Optimized for [Vercel](https://vercel.com/). Set the environment variables in yo
 
 ## Author
 
-**Kartik Koul** — [@kkwhocodes](https://x.com/kkwhocodes)
+**Kartik Koul**: [@kkwhocodes](https://x.com/kkwhocodes)
 
 - [GitHub](https://github.com/kartikkoul)
 - [LinkedIn](https://www.linkedin.com/in/kartikkoul/)
