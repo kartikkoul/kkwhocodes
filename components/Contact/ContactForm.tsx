@@ -121,7 +121,7 @@ const ContactForm = () => {
             type="email"
             required
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="youremail@gmail.com"
             className={inputClass}
             disabled={status === "sending"}
           />
