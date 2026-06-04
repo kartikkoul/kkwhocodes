@@ -16,7 +16,7 @@ export const siteConfig = {
   jobTitle: "Software Engineer",
   locale: "en_US",
   twitterHandle: "@kkwhocodes",
-  ogImageAlt: "Kartik Koul — Software Engineer portfolio",
+  ogImageAlt: "Kartik Koul — Software Engineer",
   keywords: [
     "Kartik Koul",
     "Kartik",

@@ -102,7 +102,7 @@ export function generateOgImage() {
               maxWidth: "820px",
             }}
           >
-            Full-stack · Real-time · AI / RAG — kartikkoul.com
+            Full-stack Engineer · Agentic AI · Applied AI | kartikkoul.com
           </div>
         </div>
 
